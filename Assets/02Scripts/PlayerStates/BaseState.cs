@@ -1,16 +1,18 @@
-using UnityEngine;
-
-public class BaseState : MonoBehaviour
+public abstract class BaseState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected PlayerController controller;
+    protected StateMachine stateMachine;
+    protected PlayerStatsSO stats;
+    public BaseState(PlayerController controller, StateMachine stateMachine)
     {
-        
+        this.controller = controller;
+        this.stateMachine = stateMachine;
+        this.stats = controller.Stats;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // 상태 진입 시 1회 호출
+    public virtual void Enter() { }
+    public virtual void LogicUpdate() { }
+    public virtual void PhysicsUpdate() { }
+    public virtual void Exit() { }
 }

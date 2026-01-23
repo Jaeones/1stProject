@@ -7,31 +7,37 @@ public class PlayerController : MonoBehaviour
     private InputReader inputReader;
     [SerializeField]
     private PlayerStatsSO stats;
+    [SerializeField]
+    private StateMachine stateMachine;
+    // 외부에서 stats에 접근할 수 있도록 프로퍼티 제공
+    public PlayerStatsSO Stats => stats;
+    public PlayerMovement Movement { get; private set; }
+    public Vector2 currentInput { get; private set; }
+    public bool isRunning { get; private set; }
+    public bool IsJumpTriggered { get; set; }
 
-    private PlayerMovement movement;
-    private Transform cameraTransform;
-
-    private Vector2 currentInput;
-    private bool isRunning;
-
+    // 상태 인스턴스들
+    public IdleState IdleState { get; private set; }
+    public MoveState MoveState { get; private set; }
+    public JumpState JumpState { get; private set; }
 
     private void Awake()
     {
-        movement = GetComponent<PlayerMovement>();
+        Movement = GetComponent<PlayerMovement>();
+        // 상태 인스턴스 생성
+        IdleState = new IdleState(this, stateMachine);
+        MoveState = new MoveState(this, stateMachine);
+        JumpState = new JumpState(this, stateMachine);
+
     }
 
     private void Start()
     {
-        if (Camera.main != null)
-        {
-            cameraTransform = Camera.main.transform;
-        }
-        else
-        {
-            Debug.LogError("Main Camera not found in the scene.");
-        }
         // 데이터 파일 설정값 적용 (레이어 'Ground' 설정)
-        movement.SetGroundCheckSettings(stats.GroundCheckDistance, LayerMask.GetMask("Ground"));
+        Movement.SetGroundCheckSettings(stats.GroundCheckDistance, LayerMask.GetMask("Ground"));
+
+        // 초기 상태 설정
+        stateMachine.Initialize(IdleState);
     }
 
     private void OnEnable()
@@ -48,29 +54,6 @@ public class PlayerController : MonoBehaviour
         inputReader.RunEvent -= OnRun;
     }
 
-    private void Update()
-    {
-        Vector2 moveInput = Vector2.zero;
-
-        if (cameraTransform != null && currentInput.sqrMagnitude > 0.01f)
-        {
-            // 카메라의 전방과 우측 벡터 계산
-            Vector3 camForward = cameraTransform.forward;
-            Vector3 camRight = cameraTransform.right;
-            camForward.y = 0f;
-            camRight.y = 0f;
-            camForward.Normalize();
-            camRight.Normalize();
-
-            // 입력 벡터를 카메라 기준으로 변환
-            Vector3 moveDirection = camForward * currentInput.y + camRight * currentInput.x;
-            moveInput = new Vector2(moveDirection.x, moveDirection.z);
-        }
-
-        float targetSpeed = isRunning ? stats.RunSpeed : stats.WalkSpeed;
-        movement.Move(moveInput, targetSpeed, stats.RotationSpeed);
-    }
-
     // 입력 이벤트 핸들러
     void OnMove(Vector2 input)
     {
@@ -79,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump()
     {
-        movement.Jump(stats.JumpForce);
+        Movement.Jump(stats.JumpForce);
     }
 
     private void OnRun(bool runState)

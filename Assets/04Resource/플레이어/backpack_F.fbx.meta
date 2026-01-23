@@ -3,7 +3,82 @@ guid: 0803feaf8519615479e71d0aecc7fcc3
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: B_backpack
+    second: {fileID: 2100000, guid: 506cc05024e8503458ac37bde3b3ad83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: B_metal
+    second: {fileID: 2100000, guid: cb114456ea0efd04cbefb28cdf6fb651, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: B_strap
+    second: {fileID: 2100000, guid: 4341909a21bdc3a48ae608841f284002, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_backpack_Base_color
+    second: {fileID: 2800000, guid: b510dff03a83742419165602260da47f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_backpack_Metallic
+    second: {fileID: 2800000, guid: ae0fa4465d585844a9b4344f4a426883, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_backpack_Normal_DirectX
+    second: {fileID: 2800000, guid: f4db4d3a0abd6444697f58777409d8c1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_backpack_Roughness
+    second: {fileID: 2800000, guid: 6a9696f076d74ac46b59a3c90a991825, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_metal_Base_color
+    second: {fileID: 2800000, guid: 3f071783f6fcaab44aaf1946b9ad9367, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_metal_Metallic
+    second: {fileID: 2800000, guid: d0c748ee4b57dc3479bd1cf97251ce26, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_metal_Normal_DirectX
+    second: {fileID: 2800000, guid: c1d5b92be3e223848b5117d694a70947, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_metal_Roughness
+    second: {fileID: 2800000, guid: 82fa53e531118f74292791b1c504b07c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_strap_Base_color
+    second: {fileID: 2800000, guid: 23524fd7aa086da4685bb5b28d0bae5e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_strap_Metallic
+    second: {fileID: 2800000, guid: 71e43f20267e9b042824f538cbd77c8d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_strap_Normal_DirectX
+    second: {fileID: 2800000, guid: 1db6e56908aa0794b914ea3963c7eb42, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: B_strap_Roughness
+    second: {fileID: 2800000, guid: 15d0c9b4cecaeae4692e65993e37fb6d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

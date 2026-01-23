@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsSO
   WalkSpeed: 5
   RunSpeed: 8
-  RotationSpeed: 5
+  RotationSpeed: 3
   JumpForce: 5
-  GroundCheckDistance: 1
+  GroundCheckDistance: 1.5
   GravityMultiplier: 2
