@@ -10,6 +10,7 @@ public class JumpState : BaseState
     {
         controller.Movement.Jump(stats.JumpForce);
         controller.IsJumpTriggered = false;
+        controller.CallOnJumpEvent();
         jumpStartTime = Time.time;
     }
 

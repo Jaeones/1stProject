@@ -16,5 +16,5 @@ MonoBehaviour:
   RunSpeed: 8
   RotationSpeed: 3
   JumpForce: 5
-  GroundCheckDistance: 1.5
+  GroundCheckDistance: 0.2
   GravityMultiplier: 2

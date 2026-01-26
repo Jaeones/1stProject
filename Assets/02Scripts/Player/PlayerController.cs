@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 currentInput { get; private set; }
     public bool isRunning { get; private set; }
     public bool IsJumpTriggered { get; set; }
+
+    public event Action OnJumpPerformed;
 
     // 상태 인스턴스들
     public IdleState IdleState { get; private set; }
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputReader.MoveEvent += OnMove;
+        inputReader.LookEvent += OnLook;
         inputReader.JumpEvent += OnJump;
         inputReader.RunEvent += OnRun;
     }
@@ -50,23 +54,19 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         inputReader.MoveEvent -= OnMove;
+        inputReader.LookEvent -= OnLook;
         inputReader.JumpEvent -= OnJump;
         inputReader.RunEvent -= OnRun;
     }
 
-    // 입력 이벤트 핸들러
-    void OnMove(Vector2 input)
+    private void OnLook(Vector2 input)
     {
-        currentInput = input;
+        Movement.Look(input);
     }
 
-    private void OnJump()
-    {
-        Movement.Jump(stats.JumpForce);
-    }
+    private void OnMove(Vector2 input) => currentInput = input;
+    private void OnJump() => IsJumpTriggered = true;
+    private void OnRun(bool runState) => isRunning = runState;
+    public void CallOnJumpEvent() => OnJumpPerformed?.Invoke();
 
-    private void OnRun(bool runState)
-    {
-        isRunning = runState;
-    }
 }
