@@ -6,7 +6,7 @@ public class IdleState : BaseState
 
     public override void Enter()
     {
-        controller.Movement.Move(Vector2.zero, 0f, 0f);
+        controller.Movement.Move(Vector2.zero, 0f);
     }
 
     public override void LogicUpdate()
@@ -14,12 +14,15 @@ public class IdleState : BaseState
         //1. 점프 입력 체크
         if (controller.IsJumpTriggered)
         {
-            stateMachine.ChangeState(controller.JumpState);
+            if (controller.Movement.IsGrounded())
+            {
+                stateMachine.ChangeState(controller.JumpState);
+            }
+            else
+            {
+                controller.IsJumpTriggered = false;
+            }
             return;
-        }
-        else
-        {
-            controller.IsJumpTriggered = false;
         }
 
         //2. 이동 입력 체크
